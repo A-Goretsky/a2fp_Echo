@@ -1,0 +1,36 @@
+Fleshed out plan of 2 Sections, priorities and future additions. Timeline / Designation of work at bottom.
+
+1) Complete a running version of minesweeper (Core Functionality/Is Priority)
+	a) Create Tile Class
+		i) Has isRevealed boolean 
+		ii) Has bombType int (if 0 it is not bomb) <- for gamble bombs.
+		iii) Has bombNeighbors int (if <= 0, then is safe, and not numbered) 
+	b) Create Game Class which contains Tile Class as a nested Class
+		i) Utilizes underlying 2d array of Tiles known as _board
+		ii) Has a function which creates an empty _board
+		iii) Has a function which populates an empty board using first a basic random algorithm. (At first, shall be improved upon with better algorithm, and is a priority, prerequisite for future algorithm)
+		iv) Has reveal(node) function, which sets the isRevealed bool to true, then displays if tile or performs action if bomb (base is explode and end game, gamble bombs may give bonus points or other such things), recursive reveal on neighbors if blank
+		v) Has gameOver boolean
+		vi) Running time counter
+		vii) reset() method, as to not clear scores and other saved info per play. Low Priority.
+
+2) Add additional functionality
+	a) Better bomb algo
+		i) Clusters the bombs at some points so it’s never and “even spread” across the board.
+	b) Score
+		i) Gain points as tiles are revealed (+10-ish?)
+		ii) Lose points as time goes on (-1 per 5 seconds maybe? if we can?)
+		iii) High Score functionality (import/export w/ sorting)
+
+	c) Tile Fade
+		i) Rather than immediately disappearing, make tiles fade out to reveal what’s underneath them over the span of a second or so?
+	d) Ripple Reveal
+		i) This should occur naturally if we have a tile fade when a tile is revealed, but if not: reveal blank squares adjacent to blank squares in a rippling outwards effect
+	e) Gamble Bombs Mode (Can run in conjunction with Special Tiles)
+		i) Add in varying types bombs which are still considered “bombs” by other tiles and therefore are accounted for in the tile’s number, but have differing effects when clicked on such as bonus points, nearby bomb clear and more
+	f) Special Tiles Mode (Can run in conjunction with Gamble Bombs)
+		i) Has tileType int (if special tiles are enabled (all non-bomb))
+		ii) Has different types of positive tile types, such a powerups to destroy bombs or certain revealing patterns.
+
+Timeline/Work Split
+This week most of the work will be done in class, with less being done at home due to the high number of exams we have this week, and the SAT test/subject test this Saturday. However, the goal is to have the core functioning minesweeper game being completed by Friday night, with the weekend being the time for setbacks due to exams. The rest of the game shall be created much more actively throughout the remainder of the next week, with collaborative efforts within class on the bomb placement algorithm, and individual efforts on certain gamemodes/pieces of game modes, however this split will decided closer to the point when this is being constructed. During the first week the majority of the work will essentially be done collaboratively in class, and we will just decide on who writes which method when necessary, as there are no specific necessary designations of tasks.
