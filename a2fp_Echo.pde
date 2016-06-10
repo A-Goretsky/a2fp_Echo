@@ -15,29 +15,43 @@ PImage title_art;
 PImage mine;
 
 void setup() {
+  size( 1000, 600 );
   _boardA = new Tile[9][9];
   _boardB = new Tile[16][16];
   _boardC = new Tile[30][16];
   gameOver = false;
   runTime = 0;
   level = EASY;
+  title_art = loadImage( "title_art.jpg" );
+  mine = loadImage( "mine_balloon.png" );
   display_state = TITLE;
 }
 
 void draw() {
+  if( display_state == TITLE ) {
+    titleDisplay();
+  }
+  if( display_state == SETTINGS ) {
+    settingsDisplay();
+  }
+  if( display_state == GAME ) {
+    gameDisplay();
+  }
 }
 
 /*---------------------------------------------------------
   ******************* DISPLAY FUNCTIONS *******************
   ---------------------------------------------------------*/
 
-void displayTitle() {
+void titleDisplay() {
+  background(255);
+  image( title_art, 1190, 670 );
 }
 
-void displaySettings() {
+void settingsDisplay() {
 }
 
-void displayGame() {
+void gameDisplay() {
 }
 
 /*---------------------------------------------------------
