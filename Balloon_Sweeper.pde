@@ -1,6 +1,6 @@
-Tile[][] _boardA;
-Tile[][] _boardB;
-Tile[][] _boardC;
+Tile[][] _boardA; //easy board
+Tile[][] _boardB; //intermediate board
+Tile[][] _boardC; //hard board
 boolean gameOver;
 int runTime;
 int display_state;
@@ -11,6 +11,7 @@ final int HARD = 2;
 final int TITLE = 0;
 final int SETTINGS = 1;
 final int GAME = 2;
+final int RESET = 3;
 PImage title_art;
 PImage mine;
 
@@ -43,14 +44,32 @@ void draw() {
   ******************* DISPLAY FUNCTIONS *******************
   ---------------------------------------------------------*/
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  displays title and creds, 
+  bomb-ass title art, and start button
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void titleDisplay() {
   background(255);
   image( title_art, 1190, 670 );
+  Button start = new Button( 500, 300, #FF0000, "YEA BBY", SETTINGS );
+  start.display();
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  displays the settings, includeing:
+    - level selection buttons
+  also start button
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void settingsDisplay() {
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  displays the actual game, including:
+    - board
+    - reset button
+    - running time / points
+  bomb-ass title art, and start button
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void gameDisplay() {
 }
 
