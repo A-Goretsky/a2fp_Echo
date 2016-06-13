@@ -26,6 +26,7 @@ PImage easyBoard;
 PImage medBoard;
 PImage hardBoard;
 PImage tile;
+PImage flag;
 PImage mine; //it's a balloon
 
 void setup() {
@@ -38,6 +39,7 @@ void setup() {
   medBoard  = loadImage( "mineS_board_med.png" );
   hardBoard = loadImage( "mineS_board_hard.png" );
   tile = loadImage( "tile.png" );
+  flag = loadImage( "mineS_flag.png" );
   mine = loadImage( "mine_balloon.png" );
   display_state = TITLE;
 }
@@ -133,7 +135,7 @@ void settingsDisplay() {
       reset.act();
     }
     
-    else if( /*check if coords inside tile spaces*/) {
+    else if( ) {
       //check if tile has already been revealed
       if (!(tile.isRevealed)) {
         //reveal or flad tile based on left or right click respectively
@@ -246,42 +248,37 @@ void populate( int numBombs, int firstTileRow, int firstTileCol) {
     if (abs(firstTileRow - tileRow) < 2 && abs(firstTileCol - tileCol) < 2) {
     
       //make the tile a bomb
-      tile[tileRow][tileCol].setBombType(1);
+      board[tileRow][tileCol].setBombType(1);
       
       
       //increase the bombsNeighbors value of all of the tile's neighboring tiles
       if (tileRow != 0 && tileCol != 0) {
-        tile[tileRow-1][tileCol-1].incrementNeighbors();
+        board[tileRow-1][tileCol-1].incrementNeighbors();
       }
       if (tileRow != 0) {
-        tile[tileRow-1][tileCol].incrementNeighbors();
+        board[tileRow-1][tileCol].incrementNeighbors();
       }
       if (tileRow != 0 && tileCol != board[0].length-1) {
-        tile[tileRow-1][tileCol+1].incrementNeighbors();
+        board[tileRow-1][tileCol+1].incrementNeighbors();
       }
       if (tileCol != board[0].length-1) {
-        tile[tileRow][tileCol+1].incrementNeighbors();
+        board[tileRow][tileCol+1].incrementNeighbors();
       }
       if (tileRow != board.length-1 && tileCol != board[0].length-1) {
-        tile[tileRow+1][tileCol+1].incrementNeighbors();
+        board[tileRow+1][tileCol+1].incrementNeighbors();
       }
       if (tileRow != board.length-1) {
-        tile[tileRow+1][tileCol].incrementNeighbors();
+        board[tileRow+1][tileCol].incrementNeighbors();
       }
       if (tileRow != board.length-1 && tileCol != 0) {
-        tile[tileRow+1][tileCol-1].incrementNeighbors();
+        board[tileRow+1][tileCol-1].incrementNeighbors();
       }
       if (tileCol != 0) {
-        tile[tileRow][tileCol-1].incrementNeighbors();
+        board[tileRow][tileCol-1].incrementNeighbors();
       }
-      
       
       //decrease the number of bombs we need to place by 1
       numBombs--;
     }
   }
 }
-
-/*---------------------------------------------------------
-  ******************** HELPER FUNCTIONS *******************
-  ---------------------------------------------------------*/

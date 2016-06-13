@@ -10,10 +10,8 @@ class Tile {
   //int to keep track of how many neighboring bombs a tile has
   int bombNeighbors;
   
-  int minXCoor;
-  int minYCoor;
-  int maxXCoor;
-  int maxYCoor;
+  int xcoor;
+  int ycoor;
   //------INSTANCE-VARIABLES------
   
   
@@ -24,7 +22,12 @@ class Tile {
     bombType = 0;
     bombNeighbors = 0;
   }
-  //------CONSTRUCTORS------
+  
+  //overloaded constructor to allow the creation of unique tiles
+  public Tile(int newBombType) {
+    this()
+    bombType = newBombType;
+  }
   
   
   //------METHODS------
@@ -44,7 +47,12 @@ class Tile {
   }
   
   public boolean isInside(float xcor, float ycor) {
-    
+    return abs(xcor - xcoor) < 40 && abs(ycor - ycoor) < 10;
+  }
+  
+  public void setCoords(float xcor, float ycor) {
+    xcoor = xcor;
+    ycoor = ycor;
   }
   //------METHODS------
 }
