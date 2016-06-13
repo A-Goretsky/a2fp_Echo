@@ -191,7 +191,11 @@ void endDisplay() {
       reveal(board[x][y]);
     }
   }
-  //display of game over screen?
+  //display of game over screen
+  fill( #ff0000 );
+  strokeWeight( 5 );
+  textSize( 80 );
+  text( "GAME OVER", 275, 300 );
 }
 
 /*---------------------------------------------------------

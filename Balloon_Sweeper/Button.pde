@@ -157,10 +157,5 @@ class Button {
       text( "HARD", 665, 340 );
       text( "START", 458, 442 );
     }
-      
-      
-  
-      
-    }
   
 }
