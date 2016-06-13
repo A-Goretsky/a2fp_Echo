@@ -35,7 +35,7 @@ class Tile {
     bombType = newBombType;
   }
   
-  //method that allows Game to increase the count of bombs in neighboring tiles
+  //method that allows Game to increase a tile's count of bombs in neighboring tiles
   //used upon populating the board with bombs after the first mouseClick of the user
   public void incrementNeighbors() {
     if (bombNeighbors < 1) {

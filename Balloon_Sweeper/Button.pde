@@ -32,12 +32,22 @@ class Button {
     if( state == RESET ) {
     }
     if( state == GO_TO_TITLE ) {
+      display_state = TITLE;
     }
     if( state == GO_TO_SETTINGS ) {
+      display_state = SETTINGS;
     }
     if( state == GO_TO_GAME ) {
+      display_state = GAME;
     }
-    if( state == CHANGE_LEVEL ) {
+    if( state == CHANGE_TO_EASY ) {
+      level == EASY;
+    }
+   if( state == CHANGE_TO_MED ) {
+      level == INTERMED;
+    }
+    if( state == CHANGE_TO_HARD ) {
+      level == HARD;
     }
   }
   
@@ -48,16 +58,7 @@ class Button {
     (coords of rect defined but upper-left point)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   boolean isInside( float xcor, float ycor ) {
-    if( state == RESET ) {
-    }
-    if( state == GO_TO_TITLE ) {
-    }
-    if( state == GO_TO_SETTINGS ) {
-    }
-    if( state == GO_TO_GAME ) {
-    }
-    if( state == CHANGE_LEVEL ) {
-    }
+      return xcor > x - 40 && xcor < x + 40 && ycor > y - 10 && ycor < y + 10;
   }
   
   void display() {
@@ -66,6 +67,5 @@ class Button {
     textSize(14);
     textAlign(CENTER, CENTER);
     text(txt, x, y);
-    }
   
 }

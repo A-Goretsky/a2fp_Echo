@@ -7,6 +7,7 @@ int display_state;
 int level;
 int fromStart = null;
 int currTime; //tis the time to display
+int numRevealed;
 final int EASY = 0;
 final int INTERMED = 1;
 final int HARD = 2;
@@ -17,8 +18,11 @@ final int RESET = 3;
 final int GO_TO_TITLE = 4;
 final int GO_TO_SETTINGS = 5;
 final int GO_TO_GAME = 6;
-final int CHANGE_LEVEL = 7;
-final int START_GAME = 8;
+final int CHANGE_TO_EASY = 7;
+final int CHANGE_TO_MED = 8;
+final int CHANGE_TO_HARD = 9;
+final int START_GAME = 10;
+final int GAME_OVER = 11;
 PImage title_art;
 PImage mine;
 
@@ -61,7 +65,7 @@ void draw() {
 void titleDisplay() {
   background(255);
   image( title_art, 1190, 670 );
-  Button go = new Button( 500, 300, #FF0000, "YEA BBY", SETTINGS );
+  Button go = new Button( 500, 300, #FF0000, "YEA BBY", GO_TO_SETTINGS );
   go.display();
 }
 
@@ -74,10 +78,10 @@ void settingsDisplay() {
   backgroud(255);
   
   //*****BUTTONS******
-  Button easy = new Button( 500, 300, #FF0000, "UH", SETTINGS );
-  Button med  = new Button( 500, 300, #FF0000, "YE", SETTINGS );
-  Button hard = new Button( 500, 300, #FF0000, "BBY", SETTINGS );
-  Button start = new Button( 500, 300, #FF0000, "LEGGO", SETTINGS );
+  Button easy = new Button( 300, 300, #FF0000, "UH", CHANGE_TO_EASY );
+  Button med  = new Button( 400, 300, #FF0000, "YE", CHANGE_TO_MED );
+  Button hard = new Button( 500, 300, #FF0000, "BBY", CHANGE_TO_HARD );
+  Button start = new Button( 400, 400, #FF0000, "LEGGO", GO_TO_GAME );
   
   //*****SELECTION*****
   
@@ -121,8 +125,11 @@ void gameDisplay() {
   ---------------------------------------------------------*/
 
 void reveal( Tile toReveal ) {
+  
 }
 
+
+//I'M PRETTY SURE THIS IS SUPPOSED TO BE AN ACT IN THE RESET BUTTON??????
 void reset() {
   
 }

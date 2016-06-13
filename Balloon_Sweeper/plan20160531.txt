@@ -25,7 +25,7 @@ Fleshed out plan of 2 Sections, priorities and future additions. Timeline / Desi
 	c) Tile Fade
 		i) Rather than immediately disappearing, make tiles fade out to reveal what’s underneath them over the span of a second or so?
 	d) Ripple Reveal
-		i) This should occur naturally if we have a tile fade when a tile is revealed, but if not: reveal blank squares adjacent to blank squares in a rippling outwards effect
+		i) This should occur naturally if we have a tile fade when a tile is revealed, but if not: reveal squares adjacent to blank squares in a rippling outwards effect
 	e) Gamble Bombs Mode (Can run in conjunction with Special Tiles)
 		i) Add in varying types bombs which are still considered “bombs” by other tiles and therefore are accounted for in the tile’s number, but have differing effects when clicked on such as bonus points, nearby bomb clear and more
 	f) Special Tiles Mode (Can run in conjunction with Gamble Bombs)
