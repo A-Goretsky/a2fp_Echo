@@ -24,12 +24,6 @@ class Tile {
     bombType = 0;
     bombNeighbors = 0;
   }
-  
-  //overloaded constructor to allow the creation of unique tiles
-  public Tile(int newBombType) {
-    this()
-    bombType = newBombType;
-  }
   //------CONSTRUCTORS------
   
   

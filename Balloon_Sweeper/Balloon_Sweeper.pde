@@ -1,16 +1,14 @@
-Tile[][] _easyBoard; //easy board
-Tile[][] _medBoard;  //intermediate board
-Tile[][] _hardBoard; //hard board
+Tile[][] board;
 boolean gameOver;
 int display_state;
 int level;
 int fromStart = null;
 int currTime; //tis the time to display
 int numRevealed;
-
-final int EASY = 0;
-final int INTERMED = 1;
-final int HARD = 2;
+String[] scores;
+final int EASY = 0; //board is 9x9 with 10 bombs
+final int INTERMED = 1; //board is 16x16 with 40 bombs
+final int HARD = 2; //board is 30x16 with 99 bombs
 final int TITLE = 0;
 final int SETTINGS = 1;
 final int GAME = 2;
@@ -32,11 +30,9 @@ PImage mine; //it's a balloon
 
 void setup() {
   size( 1000, 600 );
-  _easyBoard = new Tile[9][9];
-  _medBoard  = new Tile[16][16];
-  _hardBoard = new Tile[30][16];
   gameOver = false;
   level = EASY;
+  board = new Tile[9][9];
   title_art = loadImage( "title_art.jpg" );
   easyBoard = loadImage( "mineS_board_easy.png" );
   medBoard  = loadImage( "mineS_board_med.png" );
@@ -56,8 +52,12 @@ void draw() {
   if( display_state == GAME ) {
     if (fromStart == null) {
       fromStart = (int) (millis() * .001);
+      scores = loadStrings(scores.txt);
     }
     gameDisplay();
+  }
+  if (display_state == GAME_OVER) {
+    endDisplay();
   }
 }
 
@@ -129,14 +129,20 @@ void settingsDisplay() {
       start.act();
     }
     
-    //reveal or flad tile based on left or right click respectively
+    else if (start.isInside( mouseX, mouseY) ) {
+      reset.act();
+    }
+    
     else if( /*check if coords inside tile spaces*/) {
-      if (tile.isRevealed)
-      if (mouseButton == RIGHT) {
-        //flag stuff happens
-      }
-      else {
-        reveal(/*tile*/);
+      //check if tile has already been revealed
+      if (!(tile.isRevealed)) {
+        //reveal or flad tile based on left or right click respectively
+        if (mouseButton == RIGHT) {
+          //flag stuff happens
+        }
+        else {
+          reveal(/*tile*/);
+        }
       }
     }
   }
@@ -152,34 +158,40 @@ void settingsDisplay() {
 void gameDisplay() {
   //timer
   currTime = ( (int) ( millis() * .001 ) ) - fromStart;
+    
+  //*****BOARD*****
   if( level == EASY ) {
-    
-    //*****BOARD*****
     image( easyBoard, 200, 200, 320, 320 );
-    
-    //*****TIME*****
-    fill( #000000 );
-    strokeWeight( 5 );
-    textSize( 60 );
-    text( currTime, 260, 180 );
-    
-    //*****BUTTONS*****
-    Button reset = new Button( 690, 290, #FF0000, "RESET", RESET );
-    Button to_settings = new Button( 690, 290, #0066ff, "SETTINGS", GO_TO_SETTINGS );
-    
-    reset.display();
-    to_settings.display()
   }
   if( level == INTERMED ) {
-    image( medBoard, 20, 20 );
+    image( medBoard, 200, 200, 320, 320 );
   }
   if( level == HARD ) {
-    image( hardBoard, 20, 20 );
+    image( hardBoard, 80, 200, 560, 307 );
   }
+    
+  //*****TIME*****
+  fill( #000000 );
+  strokeWeight( 5 );
+  textSize( 60 );
+  text( currTime, 260, 180 );
   
-  fill( #FF0000 );
-  text( currTime.toString() + "THIS IS CURRTIME", 300, 20 );
+  //*****BUTTONS*****
+  Button reset = new Button( 690, 290, #FF0000, "RESET", RESET );
+  Button to_settings = new Button( 690, 290, #0066ff, "SETTINGS", GO_TO_SETTINGS );
   
+  reset.display();
+  to_settings.display();
+}
+
+void endDisplay() {
+  //reveal all tiles
+  for (int x = 0; x < board.length(); x++) {
+    for (int y = 0; x < board[0].length; x++) {
+      reveal(board[x][y]);
+    }
+  }
+  //display of game over screen?
 }
 
 /*---------------------------------------------------------
@@ -198,44 +210,69 @@ void reveal( Tile toReveal ) {
       populate(99, //need coords of current click to know which tile to populate around)
     }
   }
-  //check if tile has already been revealed
-  if (!(toReveal.isRevealed)) {
-    if (toReveal.bombType == 0) {
-      if (toReveal.bombNeighbors < 1) {
-        //show empty tile 
-        //reveal all tiles around tile - we need to write this
-      }
-      else {
-        //show numbered tile
-      }
+  
+  if (toReveal.bombType == 0) {
+    if (toReveal.bombNeighbors < 1) {
+      //show empty tile 
+      //reveal all tiles around tile - we need to write this
     }
-    else if (toReveal.bombType == 1) {
-      //explode bomb and game over
+    else {
+      //show numbered tile
     }
-  numRevealed++;
   }
-  //remember, it's specifically if bombNeighbors < 1, not if bombNeighbors = 0
+  else if (toReveal.bombType == 1) {
+    //save scores to external file
+    String temp = str(currTime);
+    String[] bla = {temp}
+    saveStrings("scores.txt", bla);
+    display_state = GAME_OVER; //explode bomb and game over
+  }
+  numRevealed++;
 }
 
 void populate( int numBombs, int firstTileRow, int firstTileCol) {
   //while we still need to place more bombs
   while (numBombs != 0) {
+  
     //select a random tile
-    int tileRow = (int)(Math.random() * board.length());
-    int tileCol = (int)(Math.random() * board[0].length());
-    /*
-    if the tile is not the first tile clicked on or one of the tiles around it
-    make the tile a bomb
-    increase the bombsNeighbors value of all of the tile's neighboring tiles
-    and decrease the number of bombs we need to place by 1
-    */
+    int tileRow = (int)(Math.random() * board.length);
+    int tileCol = (int)(Math.random() * board[0].length);
+    
+    //if this tile is not the first tile clicked on or one of the tiles around it
     if (abs(firstTileRow - tileRow) < 2 && abs(firstTileCol - tileCol) < 2) {
+    
+      //make the tile a bomb
       tile[tileRow][tileCol].setBombType(1);
-      if (tileRow != 0) {
-        if (tileCol != 0) {
-          
-        }
+      
+      
+      //increase the bombsNeighbors value of all of the tile's neighboring tiles
+      if (tileRow != 0 && tileCol != 0) {
+        tile[tileRow-1][tileCol-1].incrementNeighbors();
       }
+      if (tileRow != 0) {
+        tile[tileRow-1][tileCol].incrementNeighbors();
+      }
+      if (tileRow != 0 && tileCol != board[0].length-1) {
+        tile[tileRow-1][tileCol+1].incrementNeighbors();
+      }
+      if (tileCol != board[0].length-1) {
+        tile[tileRow][tileCol+1].incrementNeighbors();
+      }
+      if (tileRow != board.length-1 && tileCol != board[0].length-1) {
+        tile[tileRow+1][tileCol+1].incrementNeighbors();
+      }
+      if (tileRow != board.length-1) {
+        tile[tileRow+1][tileCol].incrementNeighbors();
+      }
+      if (tileRow != board.length-1 && tileCol != 0) {
+        tile[tileRow+1][tileCol-1].incrementNeighbors();
+      }
+      if (tileCol != 0) {
+        tile[tileRow][tileCol-1].incrementNeighbors();
+      }
+      
+      
+      //decrease the number of bombs we need to place by 1
       numBombs--;
     }
   }

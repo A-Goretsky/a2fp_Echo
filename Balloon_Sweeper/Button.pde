@@ -43,8 +43,11 @@ class Button {
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   void act() {
     if( state == RESET ) {
+      //reset everything back to defaults.
       fromStart = null;
-      saveStrings(scores.txt, Integer.toString(currTime);
+      currTime = null;
+      numRevealed = 0;
+      setup();
     }
     if( state == TITLE_TO_SETTINGS ) {
       display_state = TITLE;
