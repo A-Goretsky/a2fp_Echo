@@ -3,6 +3,8 @@
 5/23/16 - (Morning) Email sent, forms submitted (Anton)
 5/31/16 - Collaborative formulation of plan for project, work on revision of proposal. (Leith, Anton, Dylan)
 5/31/16 - Revision/Editing/Formatting/Uploading/Emailing of Revised Proposal and Plan file. (Anton, Leith)
-5/08/16 - added new files and variables and some functionality
-5/09/16 - new functions
-5/10/16 - WHOOPS NOTHING SAVED HAHA ISN’T EVERYTHING TERRIBLE. Starting over ;__;
+6/08/16 - added new files and variables and some functionality
+6/09/16 - new functions
+6/10/16 - WHOOPS NOTHING SAVED HAHA ISN’T EVERYTHING TERRIBLE. Starting over ;__;
+6/13/16 - remade everything we had done so far, fleshed out our classes and finished our project
+6/13/16 - realized we failed to actually push our most recent changes to github, and therefore lost about 2 hours of work that we didn't have the time to make up.
