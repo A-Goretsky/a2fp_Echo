@@ -2,7 +2,6 @@ Tile[][] _easyBoard; //easy board
 Tile[][] _medBoard;  //intermediate board
 Tile[][] _hardBoard; //hard board
 boolean gameOver;
-int runTime;
 int display_state;
 int level;
 int fromStart = null;
@@ -24,7 +23,11 @@ final int CHANGE_TO_HARD = 9;
 final int START_GAME = 10;
 final int GAME_OVER = 11;
 PImage title_art;
-PImage mine;
+PImage easyBoard;
+PImage medBoard;
+PImage hardBoard;
+PImage tile;
+PImage mine; //it's a balloon
 
 void setup() {
   size( 1000, 600 );
@@ -32,9 +35,12 @@ void setup() {
   _medBoard  = new Tile[16][16];
   _hardBoard = new Tile[30][16];
   gameOver = false;
-  runTime = 0;
   level = EASY;
   title_art = loadImage( "title_art.jpg" );
+  easyBoard = loadImage( "mineS_board_easy.png" );
+  medBoard  = loadImage( "mineS_board_med.png" );
+  hardBoard = loadImage( "mineS_board_hard.png" );
+  tile = loadImage( "tile.png" );
   mine = loadImage( "mine_balloon.png" );
   display_state = TITLE;
 }
@@ -64,7 +70,7 @@ void draw() {
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void titleDisplay() {
   background(255);
-  image( title_art, 1190, 670 );
+  image( title_art );
   Button go = new Button( 500, 300, #FF0000, "YEA BBY", GO_TO_SETTINGS );
   go.display();
 }
@@ -116,7 +122,19 @@ void settingsDisplay() {
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void gameDisplay() {
   //timer
-  currTime = ((int) (millis() * .001)) - fromStart;
+  currTime = ( (int) ( millis() * .001 ) ) - fromStart;
+  if( level == EASY ) {
+    image( easyBoard, 20, 20 );
+  }
+  if( level == INTERMED ) {
+    image( medBoard, 20, 20 );
+  }
+  if( level == HARD ) {
+    image( hardBoard, 20, 20 );
+  }
+  
+  fill( #FF0000 );
+  text( currTime.toString() + "THIS IS CURRTIME", 300, 20 );
   
 }
 
@@ -125,16 +143,31 @@ void gameDisplay() {
   ---------------------------------------------------------*/
 
 void reveal( Tile toReveal ) {
-  
+  if (numRevealed == 0) {
+    if (level == EASY) {
+      populate(10, //need coords of current click to know which tile to populate around)
+    }
+    if (level == INTERMED) {
+      populate(40, //need coords of current click to know which tile to populate around)
+    }
+    if (level == HARD) {
+      populate(99, //need coords of current click to know which tile to populate around)
+    }
+  }
+  //actual tile reveal code here
+  numRevealed++;
 }
 
-
-//I'M PRETTY SURE THIS IS SUPPOSED TO BE AN ACT IN THE RESET BUTTON??????
-void reset() {
-  
-}
-
-void populate( int numBombs ) {
+void populate( int numBombs, Tile firstRevealed ) {
+  if (level == EASY) {
+    for (int x = 0; x < board.length)
+  }
+  if (level == INTERMED) {
+    
+  }
+  if (level == HARD) {
+    
+  }
 }
 
 /*---------------------------------------------------------

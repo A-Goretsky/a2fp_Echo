@@ -30,6 +30,8 @@ class Button {
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   void act() {
     if( state == RESET ) {
+      fromStart = null;
+      saveStrings(scores.txt, Integer.toString(currTime);
     }
     if( state == GO_TO_TITLE ) {
       display_state = TITLE;
