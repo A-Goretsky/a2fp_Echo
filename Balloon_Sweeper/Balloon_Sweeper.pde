@@ -99,10 +99,10 @@ void settingsDisplay() {
   background(255);
   
   //*****BUTTONS******
-  Button easy = new Button( 300, 300, #FF0000, "UH", CHANGE_TO_EASY );
-  Button med  = new Button( 400, 300, #FF0000, "YE", CHANGE_TO_MED );
-  Button hard = new Button( 500, 300, #FF0000, "BBY", CHANGE_TO_HARD );
-  Button start = new Button( 400, 400, #FF0000, "LEGGO", GO_TO_GAME );
+  Button easy = new Button( 265, 340, #FF0000, "EASY", CHANGE_TO_EASY );
+  Button med  = new Button( 455, 342, #FF0000, "MEDIUM", CHANGE_TO_MED );
+  Button hard = new Button( 665, 340, #FF0000, "HARD", CHANGE_TO_HARD );
+  Button start = new Button( 458, 442, #FF0000, "START", GO_TO_GAME );
   
   //*****SELECTION*****
   

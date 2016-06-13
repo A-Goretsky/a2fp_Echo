@@ -113,5 +113,54 @@ class Button {
       textSize( 20 );
       text( "SETTINGS", 698, 378 );
     }
+    if( state == CHANGE_TO_EASY ) {
+      fill( #0066ff );
+      stroke( #0033cc );
+      strokeWeight( 2 );
+      rect( 250, 310, 110, 40 );
+      
+      fill( #000000 );
+      noStroke();
+      textSize( 30 );
+      text( "EASY", 265, 340 );
+    }
+    if( state == CHANGE_TO_MED ) {
+      fill( #0066ff );
+      stroke( #0033cc );
+      strokeWeight( 2 );
+      rect( 450, 310, 110, 40 );
+      
+      fill( #000000 );
+      noStroke();
+      textSize( 26 );
+      text( "MEDIUM", 455, 342 );
+    }
+    if( state == CHANGE_TO_HARD ) {
+      fill( #0066ff );
+      stroke( #0033cc );
+      strokeWeight( 2 );
+      rect( 650, 310, 110, 40 );
+      
+      fill( #000000 );
+      noStroke();
+      textSize( 30 );
+      text( "HARD", 665, 340 );
+    }
+    if( state == START_GAME ) {
+      fill( #00cc00 );
+      stroke( #009933 );
+      rect( 450, 410, 110, 40 );
+  
+      fill( #000000 );
+      noStroke();
+      textSize( 30 );
+      text( "HARD", 665, 340 );
+      text( "START", 458, 442 );
+    }
+      
+      
+  
+      
+    }
   
 }
