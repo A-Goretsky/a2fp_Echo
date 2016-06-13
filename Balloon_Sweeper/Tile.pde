@@ -9,6 +9,11 @@ class Tile {
   
   //int to keep track of how many neighboring bombs a tile has
   int bombNeighbors;
+  
+  int minXCoor;
+  int minYCoor;
+  int maxXCoor;
+  int maxYCoor;
   //------INSTANCE-VARIABLES------
   
   
@@ -44,10 +49,8 @@ class Tile {
     bombNeighbors++;
   }
   
-  //method that allows Game to quickly reveal the contents of a tile
-  //used when once a tile is mouseClicked
-  public void show() {
-    isRevealed = true;
+  public boolean isInside(float xcor, float ycor) {
+    
   }
   //------METHODS------
 }

@@ -1,6 +1,9 @@
 class Button {
   float x, y;
   color c;
+  int height;
+  int width;
+  buttImage;
   String txt;
   int state;
   
@@ -8,6 +11,16 @@ class Button {
     x = xcor;
     y = ycor;
     c = buttonColor;
+    txt = txtDisplay;
+    state = stateInput;
+  }
+  
+  Button(float xcor, float ycor, PImage buttonImage, int imgHeight, int imgWidth, String txtDisplay, int stateInput) {
+    x = xcor;
+    y = ycor;
+    height = imgHeight;
+    width = imgWidth;
+    buttImage = buttonImage;
     txt = txtDisplay;
     state = stateInput;
   }
@@ -22,7 +35,7 @@ class Button {
   
   button-relevant states:
     RESET
-    GO_TO_TITLE
+    TITLE_TO_SETTINGS
     GO_TO_SETTINGS
     GO_TO_GAME
     CHANGE_LEVEL
@@ -33,7 +46,7 @@ class Button {
       fromStart = null;
       saveStrings(scores.txt, Integer.toString(currTime);
     }
-    if( state == GO_TO_TITLE ) {
+    if( state == TITLE_TO_SETTINGS ) {
       display_state = TITLE;
     }
     if( state == GO_TO_SETTINGS ) {
@@ -60,14 +73,42 @@ class Button {
     (coords of rect defined but upper-left point)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   boolean isInside( float xcor, float ycor ) {
-      return xcor > x - 40 && xcor < x + 40 && ycor > y - 10 && ycor < y + 10;
+    return abs(xcor - x) < 40 && abs(ycor - y) < 10;
+    //return xcor > x - 40 && xcor < x + 40 && ycor > y - 10 && ycor < y + 10;
   }
   
   void display() {
-    fill(c);
-    noStroke();
-    textSize(14);
-    textAlign(CENTER, CENTER);
-    text(txt, x, y);
+    if( state == TITLE_TO_SETTINGS ) {
+       image( buttImage, x, y, height, width );
+       textSize( 25 );
+       strokeWeight( 5 );
+       text( txt, 807, 245 );
+    }
+    if( state == RESET ) {
+      //button
+      fill( c );
+      stroke( #cc0000 );
+      strokeWeight( 2 );
+      rect( x, y, 110, 40 );
+      
+      //text
+      fill( #000000 );
+      strokeWeight( 5 );
+      textSize( 35 );
+      text( "RESET", x + 5, y + 33 );
+    }
+    if( state == GO_TO_SETTINGS ) {
+      //button
+      fill( c );
+      stroke( #0033cc );
+      strokeWeight( 2 );
+      rect( x, y, 110, 40 );
+      
+      //text
+      fill( #000000 );
+      strokeWeight( 5 );
+      textSize( 20 );
+      text( "SETTINGS", 698, 378 );
+    }
   
 }
